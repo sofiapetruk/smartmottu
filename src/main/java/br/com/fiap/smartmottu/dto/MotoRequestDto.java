@@ -1,11 +1,11 @@
-package br.com.fiap.smartmottu.api.model;
+package br.com.fiap.smartmottu.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class MotoDto {
+public class MotoRequestDto {
 
     @NotBlank
     @Size(min = 17, max = 17)

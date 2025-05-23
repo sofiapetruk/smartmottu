@@ -1,6 +1,5 @@
 package br.com.fiap.smartmottu.entity;
 
-import br.com.fiap.smartmottu.api.model.TIpoSetorEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -26,7 +25,7 @@ public class TipoSetor {
 
     @NotBlank(message = "O tipo de moto não pode ficar em branco") @Size(max = 100)
     @Column(name = "tp_setor")
-    private TIpoSetorEnum tpSetor;
+    private String tpSetor;
 
 
 }

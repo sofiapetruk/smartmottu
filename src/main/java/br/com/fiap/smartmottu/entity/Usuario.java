@@ -2,9 +2,6 @@ package br.com.fiap.smartmottu.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,20 +23,19 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario")
     private Long idUsuario;
 
-    @NotBlank
     @Column(name = "nome")
     private String nome;
 
-
-    @Email @NotBlank
     @Column(name = "email")
     private String email;
 
-    @Size(min = 8, max = 15)
-    @NotBlank
     @Column(name = "senha")
     private String senha;
 
-
+    public Usuario(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
 
 }

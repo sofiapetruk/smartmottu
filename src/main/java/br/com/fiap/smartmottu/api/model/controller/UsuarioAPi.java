@@ -1,7 +1,10 @@
 package br.com.fiap.smartmottu.api.model.controller;
 
-import br.com.fiap.smartmottu.api.model.LoginDto;
+import br.com.fiap.smartmottu.dto.LoginRequestDto;
+import br.com.fiap.smartmottu.dto.UsuarioRequestDto;
+import br.com.fiap.smartmottu.dto.UsuarioResponseDto;
 import br.com.fiap.smartmottu.entity.Usuario;
+import br.com.fiap.smartmottu.exception.IdNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -22,7 +25,7 @@ public interface UsuarioAPi {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso")
     })
     @GetMapping
-    ResponseEntity<List<Usuario>> listAll();
+    ResponseEntity<List<UsuarioResponseDto>> listAll();
 
     @Operation(summary = "Buscar usuário por ID")
     @ApiResponses({
@@ -30,7 +33,7 @@ public interface UsuarioAPi {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
     @GetMapping("/{idUsuario}")
-    ResponseEntity<Usuario> getById(@PathVariable("idUsuario") Long idUsuario);
+    ResponseEntity<UsuarioResponseDto> getById(@PathVariable("idUsuario") Long idUsuario) throws IdNotFoundException;
 
     @Operation(summary = "Criar um novo usuário")
     @ApiResponses({
@@ -38,7 +41,7 @@ public interface UsuarioAPi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
     @PostMapping
-    ResponseEntity<Usuario> create(@Valid @RequestBody Usuario usuario);
+    ResponseEntity<UsuarioResponseDto> create(@Valid @RequestBody UsuarioRequestDto requestDto);
 
     @Operation(summary = "Atualizar um usuário existente")
     @ApiResponses({
@@ -47,9 +50,9 @@ public interface UsuarioAPi {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
     @PutMapping("/{idUsuario}")
-    ResponseEntity<Usuario> update(
+    ResponseEntity<UsuarioResponseDto> update(
             @PathVariable("idUsuario") Long idUsuario,
-            @Valid @RequestBody Usuario usuario
+            @Valid @RequestBody UsuarioRequestDto requestDto
     );
 
     @Operation(summary = "Excluir um usuário")
@@ -58,7 +61,7 @@ public interface UsuarioAPi {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
     @DeleteMapping("/{idUsuario}")
-    ResponseEntity<Void> delete(@PathVariable("idUsuario") Long idUsuario);
+    ResponseEntity<Void> delete(@PathVariable("idUsuario") Long idUsuario) throws IdNotFoundException;
 
 
     @Operation(summary = "Fazer login de usuário")
@@ -67,6 +70,6 @@ public interface UsuarioAPi {
             @ApiResponse(responseCode = "401", description = "Credenciais inválidas")
     })
     @PostMapping("/login")
-    ResponseEntity<Void> login(@Valid @RequestBody LoginDto loginRequest);
+    ResponseEntity<Void> login(@Valid @RequestBody LoginRequestDto loginRequest);
 
 }

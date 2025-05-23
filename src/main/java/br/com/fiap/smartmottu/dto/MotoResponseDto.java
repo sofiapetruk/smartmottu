@@ -1,4 +1,4 @@
-package br.com.fiap.smartmottu.api.model;
+package br.com.fiap.smartmottu.dto;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MotoResponse {
+public class MotoResponseDto {
 
     private Long   idMoto;
     private String nmChassi;

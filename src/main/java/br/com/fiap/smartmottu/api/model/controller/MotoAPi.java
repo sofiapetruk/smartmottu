@@ -1,8 +1,9 @@
 package br.com.fiap.smartmottu.api.model.controller;
 
-import br.com.fiap.smartmottu.api.model.MotoDto;
-import br.com.fiap.smartmottu.api.model.MotoResponse;
+import br.com.fiap.smartmottu.dto.MotoRequestDto;
+import br.com.fiap.smartmottu.dto.MotoResponseDto;
 import br.com.fiap.smartmottu.entity.Moto;
+import br.com.fiap.smartmottu.exception.IdNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -22,7 +23,7 @@ public interface MotoAPi {
             @ApiResponse(responseCode = "200", description = "Lista de motos retornada com sucesso")
     })
     @GetMapping
-    ResponseEntity<List<MotoResponse>> listAll();
+    ResponseEntity<List<MotoResponseDto>> listAll();
 
     @Operation(summary = "Buscar moto por ID")
     @ApiResponses({
@@ -30,7 +31,7 @@ public interface MotoAPi {
             @ApiResponse(responseCode = "404", description = "Moto não encontrada")
     })
     @GetMapping("/{idMoto}")
-    ResponseEntity<MotoResponse> getById(@PathVariable("idMoto") Long idMoto);
+    ResponseEntity<MotoResponseDto> getById(@PathVariable("idMoto") Long idMoto) throws IdNotFoundException;
 
     @Operation(summary = "Criar uma nova moto")
     @ApiResponses({
@@ -38,7 +39,7 @@ public interface MotoAPi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
     @PostMapping
-    ResponseEntity<Moto> create(@Valid @RequestBody MotoDto motoDto);
+    ResponseEntity<Moto> create(@Valid @RequestBody MotoRequestDto motoRequestDto);
 
     @Operation(summary = "Atualizar uma moto existente")
     @ApiResponses({
@@ -49,8 +50,8 @@ public interface MotoAPi {
     @PutMapping("/{idMoto}")
     ResponseEntity<Moto> update(
             @PathVariable("idMoto") Long idMoto,
-            @Valid @RequestBody MotoDto motoDto
-    );
+            @Valid @RequestBody MotoRequestDto motoRequestDto
+    ) throws IdNotFoundException;
 
     @Operation(summary = "Excluir uma moto")
     @ApiResponses({
@@ -58,7 +59,7 @@ public interface MotoAPi {
             @ApiResponse(responseCode = "404", description = "Moto não encontrada")
     })
     @DeleteMapping("/{idMoto}")
-    ResponseEntity<Void> delete(@PathVariable("idMoto") Long idMoto);
+    ResponseEntity<Void> delete(@PathVariable("idMoto") Long idMoto) throws IdNotFoundException;
 
 
 
