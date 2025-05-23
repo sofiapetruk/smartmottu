@@ -66,5 +66,5 @@
 | GET    | [/motos/paginacao]      | (http://localhost:8080/motos/paginacao) | Retorno os dados com paginação       |
 | PUT    | [/motos/{idMoto}]        | (http://localhost:8080/motos/2)     | Atualiza a moto com id especifico    |
 | DELETE | [/motos/{idMoto}] | (http://localhost:8080/motos/2)    | Delete a moto com o id especifico    |
-|SWAGGER| |[/http://localhost:8080/swagger-ui/index.html] | Verificar quais atributos temos que utilizar na nossa api|
+|SWAGGER| ---------------|(http://localhost:8080/swagger-ui/index.html)| Verificar quais atributos temos que utilizar na nossa api|
 
